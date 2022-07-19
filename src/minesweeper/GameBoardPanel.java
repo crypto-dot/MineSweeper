@@ -18,10 +18,10 @@ public class GameBoardPanel extends JPanel {
 	
 	public GameBoardPanel() {
 		super.setLayout(new GridLayout(ROWS,COLS,2,2)); //JPanel
-		for(int col = 0; col < COLS; col++) {
-			for(int row = 0; row < ROWS; row++) {
-				cells[col][row] = new Cell(col,row);
-				super.add(cells[col][row]);
+		for(int row = 0; row < ROWS; row++) {
+			for(int col = 0; col < COLS; col++) {
+				cells[row][col] = new Cell(row,col);
+				super.add(cells[row][col]);
 			}
 		}
 		
@@ -44,19 +44,19 @@ public class GameBoardPanel extends JPanel {
 		MineMap mineMap = new MineMap();
 		mineMap.newMineMap(numberOfMines);
 		
-		for(int col = 0; col < COLS; col++) {
-			for(int row = 0; row < ROWS; row++) {
+		for(int row = 0; row < ROWS; row++) {
+			for(int col = 0; col < COLS; col++) {
 				//Initialize each cell with/without a mine 
-				cells[col][row].newGame(mineMap.isMined[col][row]);
+				cells[row][col].newGame(mineMap.isMined[row][col]);
 			}
 		}
 	}
 	private int getSurroundingMines(int srcRow, int srcCol) {
 		int numMines = 0;
-		for(int col = srcCol - 1; col <= srcCol + 1; col++) {
-			for(int row = srcRow - 1; row <= srcRow + 1; row++) {
+		for(int row = srcRow - 1; row <= srcRow + 1; row++) {
+			for(int col = srcCol - 1; col <= srcCol + 1; col++) {
 				if(row >= 0 && col >= 0 && col < COLS && row < ROWS) {
-					if(cells[col][row].isMined) {
+					if(cells[row][col].isMined) {
 						numMines++;
 					}
 				}
@@ -72,10 +72,10 @@ public class GameBoardPanel extends JPanel {
 		cells[srcRow][srcCol].paint();
 		if(numMines == 0) {
 			//Recursively reveal mines
-			for(int col = srcCol - 1; col <= srcCol +1; col++) {
-				for(int row= srcRow - 1; row <= srcRow + 1; row++) {
+			for(int row = srcRow - 1; row <= srcRow +1; row++) {
+				for(int col = srcCol - 1; col <= srcCol + 1; col++) {
 					if(row >= 0 && col >= 0 && row < ROWS && col < COLS) {
-						if(!cells[col][row].isRevealed) {
+						if(!cells[row][col].isRevealed) {
 							revealCell(row,col);
 						}
 					}
@@ -103,9 +103,10 @@ public class GameBoardPanel extends JPanel {
 				}
 			} else if(e.getButton() == MouseEvent.BUTTON3) {
 				if(sourceCell.isFlagged) {
-					sourceCell.setText("");
+					sourceCell.setText(" ");
 				} else {
 					sourceCell.setText("<");
+					sourceCell.isFlagged = true;
 				}
 			}
 			

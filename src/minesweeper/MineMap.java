@@ -15,7 +15,7 @@ public class MineMap {
 		isMined[3][3] = true;
 		isMined[7][7] = true;
 		isMined[8][8] = true;
-		isMined[9][9] = true;
+		isMined[9][0] = true;
 		isMined[2][2] = true;
 		isMined[1][1] = true;
 		isMined[4][4] = true;
