@@ -12,15 +12,15 @@ public class MineMap {
 		this.numMines = numMines;
 		
 		isMined[0][0] = true;
-		isMined[3][3] = true;
-		isMined[7][7] = true;
-		isMined[8][8] = true;
-		isMined[9][0] = true;
-		isMined[2][2] = true;
-		isMined[1][1] = true;
-		isMined[4][4] = true;
-		isMined[5][5] = true;
-		isMined[6][6] = true;
+		isMined[2][4] = true;
+		isMined[1][3] = true;
+		isMined[3][8] = true;
+		isMined[3][6] = true;
+		isMined[3][5] = true;
+		isMined[2][8] = true;
+		isMined[3][9] = true;
+		isMined[4][5] = true;
+		isMined[4][6] = true;
 		
 	}
 }
